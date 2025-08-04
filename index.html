@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Status Codes Reference Guide</title>
+    <style>
+        @media print {
+            body { margin: 0; }
+            .no-print { display: none; }
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #007acc;
+            padding-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #007acc;
+            font-size: 2.5em;
+            margin: 0;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+            margin: 10px 0 0 0;
+        }
+        
+        .category {
+            margin-bottom: 30px;
+            break-inside: avoid;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.4em;
+        }
+        
+        .informational { background: linear-gradient(135deg, #e3f2fd, #bbdefb); color: #1976d2; }
+        .success { background: linear-gradient(135deg, #e8f5e8, #c8e6c9); color: #388e3c; }
+        .redirection { background: linear-gradient(135deg, #fff8e1, #ffecb3); color: #f57c00; }
+        .client-error { background: linear-gradient(135deg, #ffebee, #ffcdd2); color: #d32f2f; }
+        .server-error { background: linear-gradient(135deg, #fce4ec, #f8bbd9); color: #c2185b; }
+        
+        .codes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .code-item {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .code-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .code-number {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #007acc;
+            margin-bottom: 5px;
+        }
+        
+        .code-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .code-description {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+        
+        .bonus-section {
+            margin-top: 40px;
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border-radius: 10px;
+            padding: 25px;
+            break-inside: avoid;
+        }
+        
+        .bonus-header {
+            color: #7b1fa2;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 15px 30px;
+            align-items: center;
+        }
+        
+        .scenario {
+            color: #333;
+            padding: 8px 0;
+        }
+        
+        .status-code {
+            background: #7b1fa2;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #007acc;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: background 0.3s;
+        }
+        
+        .print-button:hover {
+            background: #005fa3;
+        }
+        
+        @page {
+            margin: 15mm;
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button no-print" onclick="window.print()">🖨️ Print as PDF</button>
+
+    <div class="header">
+        <h1>HTTP Status Codes Reference Guide</h1>
+        <p>Complete guide to HTTP response status codes and their usage</p>
+    </div>
+
+    <div class="category">
+        <div class="category-header informational">
+            ✅ 1xx – Informational
+        </div>
+        <div class="codes-grid">
+            <div class="code-item">
+                <div class="code-number">100</div>
+                <div class="code-name">Continue</div>
+                <div class="code-description">Client should continue request</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">101</div>
+                <div class="code-name">Switching Protocols</div>
+                <div class="code-description">Server is switching protocols (e.g., HTTP → WebSocket)</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category">
+        <div class="category-header success">
+            🟢 2xx – Success
+        </div>
+        <div class="codes-grid">
+            <div class="code-item">
+                <div class="code-number">200</div>
+                <div class="code-name">OK</div>
+                <div class="code-description">Standard success</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">201</div>
+                <div class="code-name">Created</div>
+                <div class="code-description">Resource successfully created (e.g., POST /user)</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">202</div>
+                <div class="code-name">Accepted</div>
+                <div class="code-description">Request received but not yet processed</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">204</div>
+                <div class="code-name">No Content</div>
+                <div class="code-description">Success but no data to send back</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category">
+        <div class="category-header redirection">
+            🟡 3xx – Redirection
+        </div>
+        <div class="codes-grid">
+            <div class="code-item">
+                <div class="code-number">301</div>
+                <div class="code-name">Moved Permanently</div>
+                <div class="code-description">Resource has a new permanent URL</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">302</div>
+                <div class="code-name">Found (Temporary Redirect)</div>
+                <div class="code-description">Temporary redirect</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">304</div>
+                <div class="code-name">Not Modified</div>
+                <div class="code-description">Use cached version (for performance)</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category">
+        <div class="category-header client-error">
+            🔴 4xx – Client Errors
+        </div>
+        <div class="codes-grid">
+            <div class="code-item">
+                <div class="code-number">400</div>
+                <div class="code-name">Bad Request</div>
+                <div class="code-description">Invalid input / request format</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">401</div>
+                <div class="code-name">Unauthorized</div>
+                <div class="code-description">Auth required (e.g., no or invalid token)</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">403</div>
+                <div class="code-name">Forbidden</div>
+                <div class="code-description">User is not allowed even if authenticated</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">404</div>
+                <div class="code-name">Not Found</div>
+                <div class="code-description">Resource doesn't exist</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">405</div>
+                <div class="code-name">Method Not Allowed</div>
+                <div class="code-description">Wrong HTTP method (e.g., POST on GET-only endpoint)</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">409</div>
+                <div class="code-name">Conflict</div>
+                <div class="code-description">Duplicate data (e.g., user already exists)</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">422</div>
+                <div class="code-name">Unprocessable Entity</div>
+                <div class="code-description">Valid format but semantically wrong (e.g., invalid email)</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">429</div>
+                <div class="code-name">Too Many Requests</div>
+                <div class="code-description">Rate limit hit</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category">
+        <div class="category-header server-error">
+            🔥 5xx – Server Errors
+        </div>
+        <div class="codes-grid">
+            <div class="code-item">
+                <div class="code-number">500</div>
+                <div class="code-name">Internal Server Error</div>
+                <div class="code-description">Generic backend error (don't leak details)</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">502</div>
+                <div class="code-name">Bad Gateway</div>
+                <div class="code-description">Gateway/proxy got invalid response from backend</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">503</div>
+                <div class="code-name">Service Unavailable</div>
+                <div class="code-description">Server is down or overloaded</div>
+            </div>
+            <div class="code-item">
+                <div class="code-number">504</div>
+                <div class="code-name">Gateway Timeout</div>
+                <div class="code-description">Upstream service took too long</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bonus-section">
+        <div class="bonus-header">
+            🧠 Bonus Tip (When to Use What)
+        </div>
+        <div class="scenarios-grid">
+            <div class="scenario">Login success</div>
+            <div class="status-code">200 OK</div>
+            
+            <div class="scenario">User created</div>
+            <div class="status-code">201 Created</div>
+            
+            <div class="scenario">Empty success (e.g., logout)</div>
+            <div class="status-code">204 No Content</div>
+            
+            <div class="scenario">Bad JSON or missing field</div>
+            <div class="status-code">400 Bad Request</div>
+            
+            <div class="scenario">Not logged in</div>
+            <div class="status-code">401 Unauthorized</div>
+            
+            <div class="scenario">Logged in but no permission</div>
+            <div class="status-code">403 Forbidden</div>
+            
+            <div class="scenario">User not found</div>
+            <div class="status-code">404 Not Found</div>
+            
+            <div class="scenario">Same user already exists</div>
+            <div class="status-code">409 Conflict</div>
+            
+            <div class="scenario">Too many tries</div>
+            <div class="status-code">429 Too Many Requests</div>
+            
+            <div class="scenario">Unhandled server crash</div>
+            <div class="status-code">500 Internal Server Error</div>
+        </div>
+    </div>
+</body>
+</html>
